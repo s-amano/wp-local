@@ -1,0 +1,48 @@
+version: "3.3"
+
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: wp
+    depends_on:
+      - db
+    ports:
+      - "80:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - ./wordpress:/var/www/html
+      - ./wordpress/Search-Replace-DB:/var/www/html/Search-Replace-DB
+
+  db:
+    image: mariadb
+    container_name: wp_mysql
+    ports:
+      - "4306:3306"
+    volumes:
+      - ./db_data:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=wordpress
+      - PMA_PASSWORD=wordpress
+    ports:
+      - 3000:80
+    volumes:
+      - ./phpmyadmin/sessions:/sessions
+
+volumes:
+  db_data:
