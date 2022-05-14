@@ -40,12 +40,15 @@ $ mkdir wordpress
 `
 $ docker-compose up -d
 `
+  
 で、http://localhost:8000/
 
 ### urlをlocalに入れ替える
 
+```
 $ cd wordpress/
 $ git clone https://github.com/interconnectit/Search-Replace-DB.git
+```
 
 ```sh
 $ docker-compose down
