@@ -58,7 +58,7 @@ $ docker-compose up -d
 http://localhost:8000/Search-Replace-DB/
 にいく。
 
-- replace: 「https://blog.hpfull.jp」 with 「http://localhost:8000」
+- replace: 「your domain」 with 「http://localhost:8000」
 - database name: 「wordpress」
 - username: 「wordpress」
 - pass: 「wordpress」
